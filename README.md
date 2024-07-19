@@ -1,2 +1,1 @@
-# vidyaFlex
-freelance teaching 
+# online_tution_centre

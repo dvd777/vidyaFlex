@@ -1,0 +1,689 @@
+{
+  "info": {
+    "_postman_id": "95cdb920-2742-4720-9689-f0370afa9be7",
+    "name": "VIDYA FLEX",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+    "_exporter_id": "26143472"
+  },
+  "item": [
+    {
+      "name": "AUTH",
+      "item": [
+        {
+          "name": "REGISTER",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"david\",\r\n    \"password\": \"123\",\r\n    \"email\":\"jcn@gmail.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://127.0.0.1:8000/api/register/"
+          },
+          "response": []
+        },
+        {
+          "name": "LOGIN",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"david\",\r\n    \"password\": \"123\",\r\n    \"email\":\"jcn@gmail.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://127.0.0.1:8000/api/login/"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Student",
+      "item": [
+        {
+          "name": "get all student details",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "name",
+                  "type": "text"
+                },
+                {
+                  "key": "bio",
+                  "value": "dfvdfvd",
+                  "type": "text"
+                },
+                {
+                  "key": "email",
+                  "value": "dfvdfvdv",
+                  "type": "text"
+                },
+                {
+                  "key": "phonenumber",
+                  "value": "vdfvas",
+                  "type": "text"
+                },
+                {
+                  "key": " profileimage",
+                  "type": "file",
+                  "src": "/C:/Users/User/Pictures/looking-through-telescope-on-a-staircase-760.png"
+                },
+                {
+                  "key": "user",
+                  "value": " 1",
+                  "type": "text"
+                },
+                {
+                  "key": "student",
+                  "value": "true",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": "http://127.0.0.1:8000/api/student/"
+          },
+          "response": []
+        },
+        {
+          "name": "get single student details",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "name",
+                  "type": "text"
+                },
+                {
+                  "key": "bio",
+                  "value": "dfvdfvd",
+                  "type": "text"
+                },
+                {
+                  "key": "email",
+                  "value": "dfvdfvdv",
+                  "type": "text"
+                },
+                {
+                  "key": "phonenumber",
+                  "value": "vdfvas",
+                  "type": "text"
+                },
+                {
+                  "key": " profileimage",
+                  "type": "file",
+                  "src": "/C:/Users/User/Pictures/looking-through-telescope-on-a-staircase-760.png"
+                },
+                {
+                  "key": "user",
+                  "value": " 1",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": "http://127.0.0.1:8000/api/student/2/"
+          },
+          "response": []
+        },
+        {
+          "name": "add student details",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "name",
+                  "type": "text"
+                },
+                {
+                  "key": "bio",
+                  "value": "dfvdfvd",
+                  "type": "text"
+                },
+                {
+                  "key": "email",
+                  "value": "dfvdfvdv",
+                  "type": "text"
+                },
+                {
+                  "key": "phonenumber",
+                  "value": "vdfvas",
+                  "type": "text"
+                },
+                {
+                  "key": " profileimage",
+                  "type": "file",
+                  "src": "/C:/Users/User/Pictures/looking-through-telescope-on-a-staircase-760.png"
+                },
+                {
+                  "key": "user",
+                  "value": " 1",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": "http://127.0.0.1:8000/api/student/"
+          },
+          "response": []
+        },
+        {
+          "name": "add student details Copy",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "name",
+                  "type": "text"
+                },
+                {
+                  "key": "bio",
+                  "value": "dfvdfvd",
+                  "type": "text"
+                },
+                {
+                  "key": "email",
+                  "value": "dfvdfvdv",
+                  "type": "text"
+                },
+                {
+                  "key": "phonenumber",
+                  "value": "vdfvas",
+                  "type": "text"
+                },
+                {
+                  "key": "profileimage",
+                  "type": "file",
+                  "src": [
+                    "/C:/Users/User/Pictures/looking-through-telescope-on-a-staircase-760.png",
+                    "/C:/Users/User/Pictures/download.jpg"
+                  ]
+                },
+                {
+                  "key": "user",
+                  "value": " 1",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": "http://127.0.0.1:8000/api/student/2/"
+          },
+          "response": []
+        },
+        {
+          "name": "add student details Copy 2",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "http://127.0.0.1:8000/api/student/3/"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Teachers",
+      "item": [
+        {
+          "name": "get all teacher details",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "name",
+                  "type": "text"
+                },
+                {
+                  "key": "bio",
+                  "value": "dfvdfvd",
+                  "type": "text"
+                },
+                {
+                  "key": "email",
+                  "value": "dfvdfvdv",
+                  "type": "text"
+                },
+                {
+                  "key": "phonenumber",
+                  "value": "vdfvas",
+                  "type": "text"
+                },
+                {
+                  "key": " profileimage",
+                  "type": "file",
+                  "src": "/C:/Users/User/Pictures/looking-through-telescope-on-a-staircase-760.png"
+                },
+                {
+                  "key": "user",
+                  "value": " 1",
+                  "type": "text"
+                },
+                {
+                  "key": "student",
+                  "value": "true",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": "http://127.0.0.1:8000/api/student/"
+          },
+          "response": []
+        },
+        {
+          "name": "get single student details",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "name",
+                  "type": "text"
+                },
+                {
+                  "key": "bio",
+                  "value": "dfvdfvd",
+                  "type": "text"
+                },
+                {
+                  "key": "email",
+                  "value": "dfvdfvdv",
+                  "type": "text"
+                },
+                {
+                  "key": "phonenumber",
+                  "value": "vdfvas",
+                  "type": "text"
+                },
+                {
+                  "key": " profileimage",
+                  "type": "file",
+                  "src": "/C:/Users/User/Pictures/looking-through-telescope-on-a-staircase-760.png"
+                },
+                {
+                  "key": "user",
+                  "value": " 1",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": "http://127.0.0.1:8000/api/student/2/"
+          },
+          "response": []
+        },
+        {
+          "name": "add student details",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "name",
+                  "type": "text"
+                },
+                {
+                  "key": "bio",
+                  "value": "dfvdfvd",
+                  "type": "text"
+                },
+                {
+                  "key": "email",
+                  "value": "dfvdfvdv",
+                  "type": "text"
+                },
+                {
+                  "key": "phonenumber",
+                  "value": "vdfvas",
+                  "type": "text"
+                },
+                {
+                  "key": " profileimage",
+                  "type": "file",
+                  "src": "/C:/Users/User/Pictures/looking-through-telescope-on-a-staircase-760.png"
+                },
+                {
+                  "key": "user",
+                  "value": " 1",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": "http://127.0.0.1:8000/api/student/"
+          },
+          "response": []
+        },
+        {
+          "name": "add student details Copy",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "name",
+                  "type": "text"
+                },
+                {
+                  "key": "bio",
+                  "value": "dfvdfvd",
+                  "type": "text"
+                },
+                {
+                  "key": "email",
+                  "value": "dfvdfvdv",
+                  "type": "text"
+                },
+                {
+                  "key": "phonenumber",
+                  "value": "vdfvas",
+                  "type": "text"
+                },
+                {
+                  "key": "profileimage",
+                  "type": "file",
+                  "src": [
+                    "/C:/Users/User/Pictures/looking-through-telescope-on-a-staircase-760.png",
+                    "/C:/Users/User/Pictures/download.jpg"
+                  ]
+                },
+                {
+                  "key": "user",
+                  "value": " 1",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": "http://127.0.0.1:8000/api/student/2/"
+          },
+          "response": []
+        },
+        {
+          "name": "add student details Copy 2",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "http://127.0.0.1:8000/api/student/3/"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Course Assignments",
+      "item": [
+        {
+          "name": "List/Create Course Assignments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://127.0.0.1:8000/api/courseassignments/"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Course Assignment",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"assignment_name\": \"Example Assignment\",\n  \"assignment_description\": \"This is an example assignment\",\n  \"assignment_end_date\": \"2024-08-01\",\n  \"course\": 1\n}"
+            },
+            "url": "http://127.0.0.1:8000/api/courseassignments/"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Course Assignment",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"assignment_name\": \"Updated Assignment\",\n  \"assignment_description\": \"This is an updated assignment\",\n  \"assignment_end_date\": \"2024-08-15\",\n  \"course\": 1\n}"
+            },
+            "url": "http://127.0.0.1:8000/api/courseassignments/1/"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Course Assignment",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "http://127.0.0.1:8000/api/courseassignments/1/"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Assignment Students",
+      "item": [
+        {
+          "name": "List/Create Assignment Students",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://127.0.0.1:8000/api/assignmentstudents/"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Assignment Student",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"assignment_description\": \"Student submission\",\n  \"assignment\": 1,\n  \"student\": 1,\n  \"assignment_file\": \"file_content_here\"\n}"
+            },
+            "url": "http://127.0.0.1:8000/api/assignmentstudents/"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Assignment Student",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"assignment_description\": \"Updated student submission\",\n  \"assignment\": 1,\n  \"student\": 1,\n  \"assignment_file\": \"updated_file_content_here\"\n}"
+            },
+            "url": "http://127.0.0.1:8000/api/assignmentstudents/1/"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Assignment Student",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "http://127.0.0.1:8000/api/assignmentstudents/1/"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Course Messages",
+      "item": [
+        {
+          "name": "List/Create Course Messages",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://127.0.0.1:8000/api/coursemessages/"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Course Message",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Example message\",\n  \"course\": 1,\n  \"sent_by\": 1,\n  \"important\": false\n}"
+            },
+            "url": "http://127.0.0.1:8000/api/coursemessages/"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Course Message",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Updated message\",\n  \"course\": 1,\n  \"sent_by\": 1,\n  \"important\": true\n}"
+            },
+            "url": "http://127.0.0.1:8000/api/coursemessages/1/"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Course Message",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "http://127.0.0.1:8000/api/coursemessages/1/"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Course Materials",
+      "item": [
+        {
+          "name": "List/Create Course Materials",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://127.0.0.1:8000/api/coursematerials/"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Course Material",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"material_file\": \"file_content_here\",\n  \"material_description\": \"Example material\",\n  \"course\": 1\n}"
+            },
+            "url": "http://127.0.0.1:8000/api/coursematerials/"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Course Material",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"material_file\": \"updated_file_content_here\",\n  \"material_description\": \"Updated material\",\n  \"course\": 1\n}"
+            },
+            "url": "http://127.0.0.1:8000/api/coursematerials/1/"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Course Material",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "http://127.0.0.1:8000/api/coursematerials/1/"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "New Request",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": ""
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:8000",
+      "type": "string"
+    }
+  ]
+}

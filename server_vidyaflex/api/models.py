@@ -7,7 +7,7 @@ class User(AbstractUser):
     teacher = models.BooleanField(default=False)
 
 
-class StudentTeacher(models.Model):  # Renamed to follow consistent naming conventions
+class StudentTeacher(models.Model):
     name = models.CharField(max_length=250, null=True, blank=True)
     bio = models.CharField(max_length=255)
     email = models.CharField(max_length=250)
@@ -50,7 +50,7 @@ class AssignmentStudent(models.Model):
     student = models.ForeignKey(
         StudentTeacher, on_delete=models.CASCADE, related_name="assignments"
     )
-    assignment_file = models.FileField(upload_to="assignments/")  # Fixed typo
+    assignment_file = models.FileField(upload_to="assignments/")
 
 
 class CourseMessage(models.Model):
@@ -58,16 +58,16 @@ class CourseMessage(models.Model):
     sent_time = models.DateTimeField(auto_now_add=True, blank=True)
     course = models.ForeignKey(
         Course, on_delete=models.CASCADE, related_name="messages"
-    )  # Changed related_name
+    )
     sent_by = models.ForeignKey(
         StudentTeacher, on_delete=models.CASCADE, related_name="messages_sent"
     )
     important = models.BooleanField(default=False)
 
 
-class CourseMaterial(models.Model):  # Renamed to follow singular convention
+class CourseMaterial(models.Model):
     material_file = models.FileField(upload_to="materials/")
-    material_description = models.CharField(max_length=255)  # Renamed for consistency
+    material_description = models.CharField(max_length=255)
     course = models.ForeignKey(
         Course, on_delete=models.CASCADE, related_name="materials"
-    )  # Added course relation
+    )

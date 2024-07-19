@@ -110,6 +110,8 @@ venv.bak/
 /site 
 
 # mypy 
+'
+
 .mypy_cache/ 
 
 # Sublime Text # 
