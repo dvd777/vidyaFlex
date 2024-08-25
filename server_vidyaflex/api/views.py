@@ -24,6 +24,8 @@ from .serializers import (
     CourseMaterialSerializer,
     RegisterSerializer,
     LoginSerializer,
+    CourseMessageSerializerPost,
+    AssignmentStudentSerializerGet,
 )
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.parsers import MultiPartParser, FormParser
@@ -37,6 +39,7 @@ class RegisterView(APIView):
             refresh = RefreshToken.for_user(user)
             return Response(
                 {
+                    "user_id": user.id,
                     "refresh": str(refresh),
                     "access": str(refresh.access_token),
                 },
@@ -51,8 +54,12 @@ class LoginView(APIView):
         if serializer.is_valid():
             user = serializer.validated_data
             refresh = RefreshToken.for_user(user)
+            studentteacher = StudentTeacher.objects.get(user=user)
             return Response(
                 {
+                    "user_id": user.id,
+                    "teacherstudentid": studentteacher.id,
+                    "role": user.student,
                     "refresh": str(refresh),
                     "access": str(refresh.access_token),
                 }
@@ -153,9 +160,19 @@ class SkillAPIView(APIView):
 
 class CourseAPIView(APIView):
     def get(self, request, pk=None):
+        tuserid = request.GET.get("tuserid", None)
+        suserid = request.GET.get("suserid", None)
         if pk:
             courses = Course.objects.get(id=pk)
             serializer = CourseSerializer(courses)
+            return Response(serializer.data)
+        elif tuserid:
+            courses = Course.objects.filter(teacher=tuserid)
+            serializer = CourseSerializer(courses, many=True)
+            return Response(serializer.data)
+        elif suserid:
+            courses = Course.objects.filter(students__id=suserid)
+            serializer = CourseSerializer(courses, many=True)
             return Response(serializer.data)
         else:
             courses = Course.objects.all()
@@ -185,7 +202,20 @@ class CourseAPIView(APIView):
 
 class CourseAssignmentAPIView(APIView):
     def get(self, request):
-        course_assignments = CourseAssignment.objects.all()
+        tuserid = request.GET.get("tuserid", None)
+        suserid = request.GET.get("suserid", None)
+
+        if tuserid:
+            course_assignments = CourseAssignment.objects.filter(
+                course__teacher__id=tuserid
+            )
+        elif suserid:
+            course_assignments = CourseAssignment.objects.filter(
+                course__students__id=suserid
+            )
+        else:
+            course_assignments = CourseAssignment.objects.all()
+
         serializer = CourseAssignmentSerializer(course_assignments, many=True)
         return Response(serializer.data)
 
@@ -238,13 +268,17 @@ class AssignmentStudentAPIView(APIView):
 
 
 class CourseMessageAPIView(APIView):
-    def get(self, request):
-        course_messages = CourseMessage.objects.all()
+    def get(self, request, course_id=None):
+        if course_id:
+            course_messages = CourseMessage.objects.filter(course_id=course_id)
+        else:
+            course_messages = CourseMessage.objects.all()
+
         serializer = CourseMessageSerializer(course_messages, many=True)
         return Response(serializer.data)
 
     def post(self, request):
-        serializer = CourseMessageSerializer(data=request.data)
+        serializer = CourseMessageSerializerPost(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -289,3 +323,80 @@ class CourseMaterialAPIView(APIView):
         course_material = get_object_or_404(CourseMaterial, pk=pk)
         course_material.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+from rest_framework.decorators import api_view
+
+
+@api_view(["POST"])
+def update_course_students(request, course_id):
+    try:
+        course = Course.objects.get(id=course_id)
+    except Course.DoesNotExist:
+        return Response(
+            {"error": "Course not found."}, status=status.HTTP_404_NOT_FOUND
+        )
+
+    id = request.GET.get("students")
+
+    # if not isinstance(students_ids, list):
+    #     return Response(
+    #         {"error": "Students should be provided as a list."},
+    #         status=status.HTTP_400_BAD_REQUEST,
+    #     )
+
+    # user= User.objects.get(id=id)
+
+    students_to_add = StudentTeacher.objects.get(id=id)
+
+    # if not students_to_add.exists():
+    #     return Response(
+    #         {"error": "No valid students found."},
+    #         status=status.HTTP_400_BAD_REQUEST,
+    #     )
+
+    course.students.add(students_to_add)
+    course.save()
+
+    return Response(
+        {"message": "Students added successfully."}, status=status.HTTP_200_OK
+    )
+
+
+@api_view(["GET"])
+def student_assignments(request, student_teacher_id):
+    try:
+        student_teacher = StudentTeacher.objects.get(id=student_teacher_id)
+
+        enrolled_courses = Course.objects.filter(students=student_teacher)
+
+        assignments = CourseAssignment.objects.filter(course__in=enrolled_courses)
+
+        serializer = CourseAssignmentSerializer(assignments, many=True)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    except StudentTeacher.DoesNotExist:
+        return Response(
+            {"error": "StudentTeacher not found"}, status=status.HTTP_404_NOT_FOUND
+        )
+
+
+@api_view(["GET"])
+def assignment_student_files(request, assignment_id):
+    try:
+        # Filter AssignmentStudent objects by the assignment_id
+        submitted_assignments = AssignmentStudent.objects.filter(
+            assignment_id=assignment_id
+        )
+
+        # Serialize the filtered objects
+        serializer = AssignmentStudentSerializerGet(submitted_assignments, many=True)
+
+        # Return the serialized data as a JSON response
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    except AssignmentStudent.DoesNotExist:
+        return Response(
+            {"detail": "Assignments not found."}, status=status.HTTP_404_NOT_FOUND
+        )

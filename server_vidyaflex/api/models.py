@@ -4,7 +4,6 @@ from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
     student = models.BooleanField(default=False)
-    teacher = models.BooleanField(default=False)
 
 
 class StudentTeacher(models.Model):
@@ -23,14 +22,28 @@ class Skill(models.Model):
 
 class Course(models.Model):
     course_name = models.CharField(max_length=255)
-    course_description = models.CharField(max_length=255)
+    course_description = models.CharField(max_length=255, null=True, blank=True)
+    course_price = models.CharField(max_length=255, null=True, blank=True)
+    course_rating = models.CharField(max_length=255, null=True, blank=True)
+    course_overview = models.CharField(max_length=255, null=True, blank=True)
+    course_profile = models.ImageField(
+        upload_to="course_profile/", null=True, blank=True
+    )
     course_start_date = models.DateField()
     course_end_date = models.DateField()
-    students = models.ManyToManyField(StudentTeacher, related_name="enrolled_courses")
-    teacher = models.ForeignKey(
-        StudentTeacher, on_delete=models.CASCADE, related_name="taught_courses"
+    students = models.ManyToManyField(
+        StudentTeacher, related_name="enrolled_courses", null=True, blank=True
     )
-    skills = models.ManyToManyField(Skill, related_name="courses")
+    teacher = models.ForeignKey(
+        StudentTeacher,
+        on_delete=models.CASCADE,
+        related_name="taught_courses",
+        null=True,
+        blank=True,
+    )
+    skills = models.ManyToManyField(
+        Skill, related_name="courses", null=True, blank=True
+    )
 
 
 class CourseAssignment(models.Model):

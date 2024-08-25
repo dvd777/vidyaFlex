@@ -19,6 +19,23 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class StudentTeacherSerializer(serializers.ModelSerializer):
+    def validate(self, attrs):
+        student_teacher = attrs.get("student")
+        userid = attrs.get("user")
+
+        # try:
+        #     user = User.objects.get(id=userid)
+        # except User.DoesNotExist:
+        #     raise serializers.ValidationError("User does not exist.")
+
+        if student_teacher:
+            userid.student = True
+        else:
+            userid.student = False
+
+        userid.save()
+        return attrs
+
     class Meta:
         model = StudentTeacher
         fields = "__all__"
@@ -31,9 +48,33 @@ class SkillSerializer(serializers.ModelSerializer):
 
 
 class CourseSerializer(serializers.ModelSerializer):
+    skills = SkillSerializer(many=True, required=False)
+    students = StudentTeacherSerializer(many=True, required=False)
+
     class Meta:
         model = Course
-        fields = "__all__"
+        fields = [
+            "id",
+            "course_name",
+            "course_description",
+            "course_price",
+            "course_rating",
+            "course_overview",
+            "course_profile",
+            "course_start_date",
+            "course_end_date",
+            "students",
+            "teacher",
+            "skills",
+        ]
+
+    def validate_course_price(self, value):
+        # Add custom validation for price if needed
+        return value
+
+    def validate_course_rating(self, value):
+        # Add custom validation for rating if needed
+        return value
 
 
 class CourseAssignmentSerializer(serializers.ModelSerializer):
@@ -48,7 +89,23 @@ class AssignmentStudentSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class AssignmentStudentSerializerGet(serializers.ModelSerializer):
+    student = StudentTeacherSerializer()
+
+    class Meta:
+        model = AssignmentStudent
+        fields = "__all__"
+
+
 class CourseMessageSerializer(serializers.ModelSerializer):
+    sent_by = StudentTeacherSerializer()
+
+    class Meta:
+        model = CourseMessage
+        fields = "__all__"
+
+
+class CourseMessageSerializerPost(serializers.ModelSerializer):
     class Meta:
         model = CourseMessage
         fields = "__all__"

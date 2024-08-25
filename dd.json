@@ -23,7 +23,7 @@
                 }
               }
             },
-            "url": "http://127.0.0.1:8000/api/register/"
+            "url": "{{base_url}}/api/register/"
           },
           "response": []
         },
@@ -41,7 +41,7 @@
                 }
               }
             },
-            "url": "http://127.0.0.1:8000/api/login/"
+            "url": "{{base_url}}/api/login/"
           },
           "response": []
         }
@@ -98,7 +98,7 @@
                 }
               ]
             },
-            "url": "http://127.0.0.1:8000/api/student/"
+            "url": "{{base_url}}/api/student/"
           },
           "response": []
         },
@@ -145,7 +145,7 @@
                 }
               ]
             },
-            "url": "http://127.0.0.1:8000/api/student/2/"
+            "url": "{{base_url}}/api/student/2/"
           },
           "response": []
         },
@@ -189,7 +189,7 @@
                 }
               ]
             },
-            "url": "http://127.0.0.1:8000/api/student/"
+            "url": "{{base_url}}/api/student/"
           },
           "response": []
         },
@@ -236,7 +236,7 @@
                 }
               ]
             },
-            "url": "http://127.0.0.1:8000/api/student/2/"
+            "url": "{{base_url}}/api/student/2/"
           },
           "response": []
         },
@@ -245,7 +245,7 @@
           "request": {
             "method": "DELETE",
             "header": [],
-            "url": "http://127.0.0.1:8000/api/student/3/"
+            "url": "{{base_url}}/api/student/3/"
           },
           "response": []
         }
@@ -302,7 +302,7 @@
                 }
               ]
             },
-            "url": "http://127.0.0.1:8000/api/student/"
+            "url": "{{base_url}}/api/student/"
           },
           "response": []
         },
@@ -349,7 +349,7 @@
                 }
               ]
             },
-            "url": "http://127.0.0.1:8000/api/student/2/"
+            "url": "{{base_url}}/api/student/2/"
           },
           "response": []
         },
@@ -393,7 +393,7 @@
                 }
               ]
             },
-            "url": "http://127.0.0.1:8000/api/student/"
+            "url": "{{base_url}}/api/student/"
           },
           "response": []
         },
@@ -440,7 +440,7 @@
                 }
               ]
             },
-            "url": "http://127.0.0.1:8000/api/student/2/"
+            "url": "{{base_url}}/api/student/2/"
           },
           "response": []
         },
@@ -449,7 +449,7 @@
           "request": {
             "method": "DELETE",
             "header": [],
-            "url": "http://127.0.0.1:8000/api/student/3/"
+            "url": "{{base_url}}/api/student/3/"
           },
           "response": []
         }
@@ -463,7 +463,7 @@
           "request": {
             "method": "GET",
             "header": [],
-            "url": "http://127.0.0.1:8000/api/courseassignments/"
+            "url": "{{base_url}}/api/courseassignments/"
           },
           "response": []
         },
@@ -476,7 +476,7 @@
               "mode": "raw",
               "raw": "{\n  \"assignment_name\": \"Example Assignment\",\n  \"assignment_description\": \"This is an example assignment\",\n  \"assignment_end_date\": \"2024-08-01\",\n  \"course\": 1\n}"
             },
-            "url": "http://127.0.0.1:8000/api/courseassignments/"
+            "url": "{{base_url}}/api/courseassignments/"
           },
           "response": []
         },
@@ -489,7 +489,7 @@
               "mode": "raw",
               "raw": "{\n  \"assignment_name\": \"Updated Assignment\",\n  \"assignment_description\": \"This is an updated assignment\",\n  \"assignment_end_date\": \"2024-08-15\",\n  \"course\": 1\n}"
             },
-            "url": "http://127.0.0.1:8000/api/courseassignments/1/"
+            "url": "{{base_url}}/api/courseassignments/1/"
           },
           "response": []
         },
@@ -498,7 +498,7 @@
           "request": {
             "method": "DELETE",
             "header": [],
-            "url": "http://127.0.0.1:8000/api/courseassignments/1/"
+            "url": "{{base_url}}/api/courseassignments/1/"
           },
           "response": []
         }
@@ -512,7 +512,7 @@
           "request": {
             "method": "GET",
             "header": [],
-            "url": "http://127.0.0.1:8000/api/assignmentstudents/"
+            "url": "{{base_url}}/api/assignmentstudents/"
           },
           "response": []
         },
@@ -525,7 +525,7 @@
               "mode": "raw",
               "raw": "{\n  \"assignment_description\": \"Student submission\",\n  \"assignment\": 1,\n  \"student\": 1,\n  \"assignment_file\": \"file_content_here\"\n}"
             },
-            "url": "http://127.0.0.1:8000/api/assignmentstudents/"
+            "url": "{{base_url}}/api/assignmentstudents/"
           },
           "response": []
         },
@@ -538,7 +538,7 @@
               "mode": "raw",
               "raw": "{\n  \"assignment_description\": \"Updated student submission\",\n  \"assignment\": 1,\n  \"student\": 1,\n  \"assignment_file\": \"updated_file_content_here\"\n}"
             },
-            "url": "http://127.0.0.1:8000/api/assignmentstudents/1/"
+            "url": "{{base_url}}/api/assignmentstudents/1/"
           },
           "response": []
         },
@@ -547,7 +547,7 @@
           "request": {
             "method": "DELETE",
             "header": [],
-            "url": "http://127.0.0.1:8000/api/assignmentstudents/1/"
+            "url": "{{base_url}}/api/assignmentstudents/1/"
           },
           "response": []
         }
@@ -561,7 +561,7 @@
           "request": {
             "method": "GET",
             "header": [],
-            "url": "http://127.0.0.1:8000/api/coursemessages/"
+            "url": "{{base_url}}/api/coursemessages/"
           },
           "response": []
         },
@@ -574,7 +574,7 @@
               "mode": "raw",
               "raw": "{\n  \"message\": \"Example message\",\n  \"course\": 1,\n  \"sent_by\": 1,\n  \"important\": false\n}"
             },
-            "url": "http://127.0.0.1:8000/api/coursemessages/"
+            "url": "{{base_url}}/api/coursemessages/"
           },
           "response": []
         },
@@ -587,7 +587,7 @@
               "mode": "raw",
               "raw": "{\n  \"message\": \"Updated message\",\n  \"course\": 1,\n  \"sent_by\": 1,\n  \"important\": true\n}"
             },
-            "url": "http://127.0.0.1:8000/api/coursemessages/1/"
+            "url": "{{base_url}}/api/coursemessages/1/"
           },
           "response": []
         },
@@ -596,7 +596,7 @@
           "request": {
             "method": "DELETE",
             "header": [],
-            "url": "http://127.0.0.1:8000/api/coursemessages/1/"
+            "url": "{{base_url}}/api/coursemessages/1/"
           },
           "response": []
         }
@@ -610,7 +610,7 @@
           "request": {
             "method": "GET",
             "header": [],
-            "url": "http://127.0.0.1:8000/api/coursematerials/"
+            "url": "{{base_url}}/api/coursematerials/"
           },
           "response": []
         },
@@ -623,7 +623,7 @@
               "mode": "raw",
               "raw": "{\n  \"material_file\": \"file_content_here\",\n  \"material_description\": \"Example material\",\n  \"course\": 1\n}"
             },
-            "url": "http://127.0.0.1:8000/api/coursematerials/"
+            "url": "{{base_url}}/api/coursematerials/"
           },
           "response": []
         },
@@ -636,7 +636,7 @@
               "mode": "raw",
               "raw": "{\n  \"material_file\": \"updated_file_content_here\",\n  \"material_description\": \"Updated material\",\n  \"course\": 1\n}"
             },
-            "url": "http://127.0.0.1:8000/api/coursematerials/1/"
+            "url": "{{base_url}}/api/coursematerials/1/"
           },
           "response": []
         },
@@ -645,7 +645,7 @@
           "request": {
             "method": "DELETE",
             "header": [],
-            "url": "http://127.0.0.1:8000/api/coursematerials/1/"
+            "url": "{{base_url}}/api/coursematerials/1/"
           },
           "response": []
         }

@@ -11,6 +11,9 @@ from .views import (
     RegisterView,
     LoginView,
 )
+from .views import *
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path("register/", RegisterView.as_view(), name="register"),
@@ -28,7 +31,18 @@ urlpatterns = [
     path("assignmentstudents/", AssignmentStudentAPIView.as_view()),
     path("assignmentstudents/<int:pk>/", AssignmentStudentAPIView.as_view()),
     path("coursemessages/", CourseMessageAPIView.as_view()),
-    path("coursemessages/<int:pk>/", CourseMessageAPIView.as_view()),
+    path("coursemessages/<int:course_id>/", CourseMessageAPIView.as_view()),
     path("coursematerials/", CourseMaterialAPIView.as_view()),
     path("coursematerials/<int:pk>/", CourseMaterialAPIView.as_view()),
-]
+    path("enroll/<int:course_id>/", update_course_students, name="enroll"),
+    path(
+        "student/<int:student_teacher_id>/assignments/",
+        student_assignments,
+        name="student-assignments",
+    ),
+    path(
+        "assignments/<int:assignment_id>/files/",
+        assignment_student_files,
+        name="assignment-student-files",
+    ),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
