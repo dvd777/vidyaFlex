@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.utils import timezone
+
+
 
 
 class User(AbstractUser):
@@ -68,7 +71,7 @@ class AssignmentStudent(models.Model):
 
 class CourseMessage(models.Model):
     message = models.CharField(max_length=255)
-    sent_time = models.DateTimeField(auto_now_add=True, blank=True)
+    sent_time = models.DateTimeField(default=timezone.now, blank=True)
     course = models.ForeignKey(
         Course, on_delete=models.CASCADE, related_name="messages"
     )
