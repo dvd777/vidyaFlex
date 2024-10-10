@@ -8,7 +8,7 @@ function Navbar() {
     const userid = localStorage.getItem('id')
 
     return (
-        <header className="bg-white shadow">
+        <header className="bg-white shadow" id='home'>
             <div className="container mx-auto px-6 py-3 flex justify-between items-center">
                 <div>
                     <Link to='/' className="text-xl font-bold text-gray-800 lg:text-2xl">

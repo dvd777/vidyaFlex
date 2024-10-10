@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../config';
-import { FaEdit } from 'react-icons/fa';
+import { FaDownload, FaEdit } from 'react-icons/fa';
 import { FaTrash } from 'react-icons/fa';
 import StudentSidebar from './StudentSidebar';
 
@@ -85,7 +85,7 @@ function MyCourses() {
                                 <h3 className="text-lg font-medium text-gray-800 truncate">
                                     {course.course_name}
                                 </h3>
-                                <p className="text-sm text-gray-500">{course.course_description}</p>
+                                <p className="text-sm text-gray-500 truncate">{course.course_description}</p>
                                 <div className="flex justify-between items-center mt-2">
                                     <span className="text-xl font-bold text-gray-800">
                                         {course.course_price ? `$${course.course_price}` : "Free"}
@@ -121,7 +121,7 @@ export default MyCourses;
 function CourseDetailsPopup({ onClose, course }) {
     return (
         <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
-            <div className="bg-white p-6 rounded-lg shadow-lg w-3/4 max-w-2xl overflow-y-auto h-auto relative">
+            <div className="bg-white p-6 rounded-lg shadow-lg w-3/4 max-w-2xl h-[100vh] overflow-scroll relative">
                 <button
                     onClick={() => { onClose(false) }}
                     className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-300 transition-colors duration-200"
@@ -162,6 +162,29 @@ function CourseDetailsPopup({ onClose, course }) {
                             Start Date: {new Date(course.course_start_date).toLocaleDateString()} &nbsp; &nbsp;
                             End Date: {new Date(course.course_end_date).toLocaleDateString()}
                         </p>
+                        <div className="mt-4">
+                            <h3 className="text-lg font-semibold">Course Materials</h3>
+                            <div className="flex flex-wrap gap-2 ">
+
+                            {course.materials.length > 0 ? (
+                                course.materials.map((material,index) => (
+                                    <a
+                                    href={config.base_url + material.material_file}
+                                    download
+                                    target='__blank'
+                                    // className="text-blue-500 hover:text-blue-700"
+                                 className="flex items-center gap-4 mb-2 bg-gray-300 rounded-md px-1">
+                                        <p className="text-gray-600">material - {index+1}</p>
+                                        
+                                           <FaDownload/>
+                                        </a>
+                                    // </div>
+                                ))
+                            ) : (
+                                <p className="text-gray-600">No materials available.</p>
+                            )}
+                            </div>
+                        </div>
                         <p className="text-sm text-gray-600 mb-2">
                             {course.students.length} student{course.students.length > 1 ? 's' : ''} enrolled
                         </p>

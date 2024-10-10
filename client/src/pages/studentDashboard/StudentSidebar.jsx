@@ -14,9 +14,12 @@ function StudentSidebar() {
 
     return (
         <div className="min-w-64 max-w-64 h-screen bg-[#1D2026] text-gray-300 flex flex-col">
-            <div>
-                <img src={logo} alt="" className="mix-blend-screen" />
-            </div>
+            <Link to={"/"}>
+
+                <div>
+                    <img src={logo} alt="" className="mix-blend-screen" />
+                </div>
+            </Link>
             <div className="flex flex-col p-4">
                 <Link
                     to={`/student/courses/${userid}`}

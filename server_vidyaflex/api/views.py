@@ -40,6 +40,8 @@ class RegisterView(APIView):
             return Response(
                 {
                     "user_id": user.id,
+                    # "teacherstudentid": studentteacher.id,
+                    "role": user.student,
                     "refresh": str(refresh),
                     "access": str(refresh.access_token),
                 },

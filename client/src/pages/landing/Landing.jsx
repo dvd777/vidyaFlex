@@ -1,11 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../../components/Navbar';
 import { accessCheck, roleCheck } from '../../utils/access_check';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Footer from '../../components/Footer';
+import axios from 'axios';
+import config from '../../config';
 
 const LandingPage = () => {
     const navigate = useNavigate()
     const userid = localStorage.getItem('id')
+    const [courses, setCourses] = useState([]);
+
+    useEffect(() => {
+        const fetchCourses = async () => {
+            try {
+                const response = await axios.get(`${config.base_url}/courses/`);
+                setCourses(response.data);
+            } catch (error) {
+                console.error('Failed to fetch courses:', error);
+            }
+        };
+
+        fetchCourses();
+    }, []);
     return (
         <div>
             {/* Navbar */}
@@ -122,80 +139,50 @@ const LandingPage = () => {
                             </div>
                         </div>
                         <div class="w-full px-3 mb-12 lg:w-1/2 lg:mb-0">
-                            <img class="mx-auto sm:max-w-sm lg:max-w-full" src="https://cdn.devdojo.com/images/december2020/macbook.png" alt="feature image" />
+                            <img class="mx-auto sm:max-w-sm lg:max-w-full" src="https://assets-cdn.calibr.ai/blogs/blogs_0ikhyet6ucuokcr.png" alt="feature image" />
                         </div>
                     </div>
                 </div>
             </section>
 
 
-            <section className="container mx-auto px-6 py-12">
-                <h2 className="text-2xl font-semibold text-gray-800">Browse top category</h2>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-6">
-                    {/* Sample Category */}
-                    <div className="bg-white p-6 rounded-lg shadow">
-                        <div className="text-lg font-medium text-gray-700">Development</div>
-                        <div className="text-sm text-gray-500">42,089 Courses</div>
-                    </div>
-
-                    <div className="bg-white p-6 rounded-lg shadow">
-                        <div className="text-lg font-medium text-gray-700">Tech</div>
-                        <div className="text-sm text-gray-500">42,089 Courses</div>
-                    </div>
-                    <div className="bg-white p-6 rounded-lg shadow">
-                        <div className="text-lg font-medium text-gray-700">Language</div>
-                        <div className="text-sm text-gray-500">42,089 Courses</div>
-                    </div>
-                    {/* Repeat for other categories */}
-                </div>
-            </section>
 
             {/* Best Selling Courses */}
             <section className="bg-gray-100 py-12">
-                <div className="container mx-auto px-6">
-                    <h2 className="text-2xl font-semibold text-gray-800">Best selling courses</h2>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-6">
-                        {/* Sample Course Card */}
-                        <div className="bg-white p-6 rounded-lg shadow">
-                            <img src="course-image.jpg" alt="Course" className="w-full h-32 object-cover rounded-md" />
-                            <h3 className="text-lg font-medium text-gray-700 mt-4">Course Title</h3>
-                            <p className="text-sm text-gray-500">Instructor Name</p>
-                            <div className="flex justify-between items-center mt-4">
-                                <span className="text-xl font-bold text-gray-800">$57</span>
-                                <button className="text-blue-500 hover:underline">Enroll</button>
+                    <h2 className="text-2xl font-semibold text-gray-800">New courses</h2>
+                    <div className="flex flex-wrap justify-evenly w-full">
+
+                    {courses.slice(0, 3).map(course => (
+                        <div>
+                        <Link key={course.id} to={`/courses/${course.id}`}>
+                            {/* <img src={config.base_url + course.course_profile || courseimage} alt={course.course_name} className="w-full h-32 object-cover rounded-md" />
+                            <div className="mt-4">
+                                <h3 className="text-lg font-medium text-gray-800">{course.course_name}</h3>
+                                <p className="text-sm text-gray-500">{course.course_description}</p>
+                                <div className="flex justify-between items-center mt-2">
+                                    <span className="text-xl font-bold text-gray-800">{course.course_price ? `$${course.course_price}` : 'Free'}</span>
+                                    <span className="text-gray-600">{course.course_rating ? `${course.course_rating}★` : 'No ratings'}</span>
+                                </div>
+                                <p className="text-sm text-gray-600 mt-2">{course.students.length} students</p>
+                            </div> */}
+                                <div className="bg-white p-6 rounded-lg shadow">
+                                    <img src={config.base_url + course.course_profile} alt="Course" className="w-full h-32 object-cover rounded-md" />
+                                    <h3 className="text-lg font-medium text-gray-700 mt-4">{course.course_name}</h3>
+                                    {/* <p className="text-sm text-gray-500">Instructor Name</p> */}
+                                    <span className="text-xl font-bold text-gray-800">{course.course_price ? `$${course.course_price}` : 'Free'}</span>
+                                    <div className="flex justify-between items-center mt-4">
+                                        {/* <button className="text-blue-500 hover:underline">Enroll</button> */}
+                                    </div>
                             </div>
-                        </div>
-                        {/* Repeat for other courses */}
+                        </Link>
+                            </div>
+                    ))}
                     </div>
-                </div>
+
             </section>
 
             {/* Footer */}
-            <footer className="bg-gray-800 text-white py-12">
-                <div className="container mx-auto px-6">
-                    <div className="flex justify-between">
-                        <div>
-                            <h3 className="text-lg font-semibold">E-tutor</h3>
-                            <p className="text-sm">A description of your platform can go here.</p>
-                        </div>
-                        <div>
-                            <h3 className="text-lg font-semibold">Company</h3>
-                            <nav className="mt-4 space-y-2">
-                                <a href="#" className="text-gray-400 hover:text-white">About Us</a>
-                                <a href="#" className="text-gray-400 hover:text-white">Contact</a>
-                                <a href="#" className="text-gray-400 hover:text-white">Support</a>
-                            </nav>
-                        </div>
-                        <div>
-                            <h3 className="text-lg font-semibold">Support</h3>
-                            <nav className="mt-4 space-y-2">
-                                <a href="#" className="text-gray-400 hover:text-white">FAQs</a>
-                                <a href="#" className="text-gray-400 hover:text-white">Help Center</a>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            <Footer />
         </div>
     );
 };

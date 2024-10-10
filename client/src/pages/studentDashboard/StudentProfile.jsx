@@ -70,6 +70,7 @@ const StudentProfile = () => {
             <StudentSidebar />
             <div className="bg-white md:mx-auto rounded shadow-xl w-full overflow-y-scroll h-dvh px-10">
                 <div className="px-5 py-2 flex flex-col gap-3 pb-6">
+
                     <div className="h-[90px] shadow-md w-[90px] rounded-full border-4 overflow-hidden border-white">
                         <img
                             src={config.base_url + teacher.profileimage}
@@ -82,14 +83,7 @@ const StudentProfile = () => {
                         <p className="text-sm text-gray-600">{teacher.email}</p>
                         <p className="text-sm text-gray-600">{teacher.phonenumber}</p>
                     </div>
-                    {/* <h4 className="text-md font-medium leading-3">Skills</h4>
-                        <div className="flex gap-3 flex-wrap">
-                            {skills.map(skill => (
-                                <span key={skill} className="rounded-sm bg-blue-100 px-3 py-1 text-xs font-medium text-blue-800">
-                                    {skill}
-                                </span>
-                            ))}
-                        </div> */}
+
 
                     <h4 className="text-md font-medium leading-3">About</h4>
                     <p className="text-sm text-stone-500">{teacher.bio}</p>

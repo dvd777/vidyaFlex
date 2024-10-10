@@ -47,10 +47,17 @@ class SkillSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+
+class CourseMaterialSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CourseMaterial
+        fields = "__all__"
+
+        
 class CourseSerializer(serializers.ModelSerializer):
     skills = SkillSerializer(many=True, required=False)
     students = StudentTeacherSerializer(many=True, required=False)
-
+    materials = CourseMaterialSerializer(many=True, read_only=True)
     class Meta:
         model = Course
         fields = [
@@ -66,6 +73,7 @@ class CourseSerializer(serializers.ModelSerializer):
             "students",
             "teacher",
             "skills",
+            "materials"
         ]
 
     def validate_course_price(self, value):
@@ -111,10 +119,7 @@ class CourseMessageSerializerPost(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class CourseMaterialSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CourseMaterial
-        fields = "__all__"
+
 
 
 class RegisterSerializer(serializers.ModelSerializer):

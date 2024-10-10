@@ -3,7 +3,7 @@ import TeacherSidebar from './TeacherSidebar';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../config';
-import { FaEdit } from 'react-icons/fa';
+import { FaDownload, FaEdit } from 'react-icons/fa';
 import { FaTrash } from 'react-icons/fa';
 
 function MyCourses() {
@@ -117,7 +117,7 @@ function MyCourses() {
                                         <h3 className="text-lg font-medium text-gray-800 truncate">
                                             {course.course_name}
                                         </h3>
-                                        <p className="text-sm text-gray-500">{course.course_description}</p>
+                                        <p className="text-sm text-gray-500 truncate">{course.course_description}</p>
                                         <div className="flex justify-between items-center mt-2">
                                             <span className="text-xl font-bold text-gray-800">
                                                 {course.course_price ? `$${course.course_price}` : "Free"}
@@ -321,9 +321,40 @@ function CreateOrEditCoursePopup({ onClose, onCourseCreatedOrUpdated, course }) 
 
 
 function CourseDetailsPopup({ onClose, course }) {
+    const [selectedFile, setSelectedFile] = useState(null);
+
+    const handleFileChange = (e) => {
+        setSelectedFile(e.target.files[0]);
+    };
+
+    const handleUpload = () => {
+        if (selectedFile) {
+            handleUploadMaterial(selectedFile);
+            setSelectedFile(null); 
+        }
+    };
+
+    const handleUploadMaterial = (file) => {
+        const formData = new FormData();
+        formData.append('material_file', file);
+        formData.append('course', course.id); 
+        formData.append('material_description',"file"); 
+    
+        axios.post(`${config.base_url}/coursematerials/`,  formData,
+        )
+            .then((response) => {
+                console.log(response.data);
+                onClose(false)
+                
+            })
+            .catch((error) => {
+                console.error('Error uploading material:', error);
+            });
+    };
+    
     return (
         <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
-            <div className="bg-white p-6 rounded-lg shadow-lg w-3/4 max-w-2xl overflow-y-auto h-auto relative">
+            <div className="bg-white p-6 rounded-lg shadow-lg w-3/4 max-w-2xl overflow-y-auto h-[100vh] overflow-scroll relative">
                 <button
                     onClick={() => { onClose(false) }}
                     className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-300 transition-colors duration-200"
@@ -369,29 +400,46 @@ function CourseDetailsPopup({ onClose, course }) {
                         <p className="text-sm text-gray-600 mb-2">
                             {course.students.length} student{course.students.length > 1 ? 's' : ''} enrolled
                         </p>
-                        {course.students.length > 0 && (
-                            <div className="mt-4">
-                                <h3 className="text-lg font-semibold">Students</h3>
-                                {course.students.map(student => (
-                                    <div key={student.id} className="flex items-center gap-4 mb-2">
-                                        <img
-                                            src={student.profileimage || '/default-student-image.jpg'}
-                                            alt={student.name}
-                                            className="w-12 h-12 object-cover rounded-full"
-                                        />
-                                        <div>
-                                            <p className="font-medium">{student.name}</p>
-                                            <p className="text-gray-600">{student.email}</p>
-                                            <p className="text-gray-600">{student.phonenumber}</p>
-                                            <p className="text-gray-500">{student.bio || 'No bio available'}</p>
-                                        </div>
-                                    </div>
-                                ))}
+
+                        {/* Displaying course materials */}
+                        <div className="mt-4">
+                            <h3 className="text-lg font-semibold">Course Materials</h3>
+                            <div className="flex flex-wrap gap-2 ">
+
+                            {course.materials.length > 0 ? (
+                                course.materials.map((material,index) => (
+                                    <a
+                                    href={config.base_url + material.material_file}
+                                    download
+                                    target='__blank'
+                                    // className="text-blue-500 hover:text-blue-700"
+                                 className="flex items-center gap-4 mb-2 bg-gray-300 rounded-md px-1">
+                                        <p className="text-gray-600">material - {index+1}</p>
+                                        
+                                           <FaDownload/>
+                                        </a>
+                                    // </div>
+                                ))
+                            ) : (
+                                <p className="text-gray-600">No materials available.</p>
+                            )}
                             </div>
-                        )}
+                        </div>
+
+                        {/* Upload course materials */}
+                        <div className="mt-4">
+                            <h3 className="text-lg font-semibold mb-2">Add Course Material</h3>
+                            <input type="file" onChange={handleFileChange} className="mb-2" />
+                            <button
+                                onClick={handleUpload}
+                                className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors"
+                                disabled={!selectedFile}
+                            >
+                                Upload Material
+                            </button>
+                        </div>
                     </div>
                 </div>
-
             </div>
         </div>
     );

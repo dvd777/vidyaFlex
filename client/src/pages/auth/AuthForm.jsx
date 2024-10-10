@@ -41,12 +41,11 @@ const AuthForm = () => {
                 password: formData.password
             } : formData);
 
-            (isLogin ? navigate('/courses') : navigate(`/select-role/${response.data.user_id}`));
             localStorage.setItem('access', response.data.access);
             localStorage.setItem('id', response.data.user_id);
             localStorage.setItem('role', response.data.role);
             localStorage.setItem('teacherid', response.data.teacherstudentid);
-            console.log("Response:", response.data);
+            (isLogin ? (response.data.role ===true ?   navigate('/courses'): navigate(`/tutor/courses/${response.data.user_id}/`)) : navigate(`/select-role/${response.data.user_id}`));
         } catch (error) {
             console.error("Error:", error);
         }

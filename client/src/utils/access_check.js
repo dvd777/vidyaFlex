@@ -5,7 +5,8 @@ function accessCheck() {
 
 function roleCheck() {
   const role = localStorage.getItem("role");
-  return role === "true" ? false : true;
+  console.log(role);
+  return role === "false" ? true : false;
 }
 
 export { accessCheck, roleCheck };
